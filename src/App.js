@@ -40,6 +40,9 @@ export default function App() {
         center={center}
         zoom={10}
         options={options}
+        onClick={(event) => {
+          console.log(event);
+        }}
       ></GoogleMap>
     </div>
   );
