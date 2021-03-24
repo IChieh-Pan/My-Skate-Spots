@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+h2 {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  color: rgb(56, 48, 48);
+  z-index: 10;
+  margin:0;
+  padding: 0;
+
+}
