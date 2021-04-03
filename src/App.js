@@ -1,6 +1,8 @@
 import React from "react";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { useState, useCallback, useRef } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
+// import { skateboard_icon } from "../public/skateboard_icon.";
 
 const libraries = ["places"];
 const containerStyle = {
@@ -24,6 +26,24 @@ export default function App() {
     libraries,
   });
 
+  const [markers, setMarkers] = useState([]);
+
+  const onMapClick = useCallback((event) => {
+    setMarkers((current) => [
+      ...current,
+      {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+        time: new Date(),
+      },
+    ]);
+  }, []);
+
+  const mapRef = useRef();
+  // const onMapLoad = useCallback((map) => {
+  //   mapRef.cureent = map;
+  // }, []);
+
   if (loadError) return "Error laoding maps";
   if (!isLoaded) return "Loading map...";
 
@@ -40,10 +60,22 @@ export default function App() {
         center={center}
         zoom={10}
         options={options}
-        onClick={(event) => {
-          console.log(event);
-        }}
-      ></GoogleMap>
+        onClick={onMapClick}
+        // onLoad={onMapLoad}
+      >
+        {markers.map((marker) => (
+          <Marker
+            key={marker.time.toISOString()}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            icon={{
+              url: "../skateboard.png",
+              scaledSize: new window.google.maps.Size(30, 30),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
+          />
+        ))}
+      </GoogleMap>
     </div>
   );
 }
