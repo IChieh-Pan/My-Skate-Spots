@@ -27,6 +27,7 @@ export default function App() {
   });
 
   const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
 
   const onMapClick = useCallback((event) => {
     setMarkers((current) => [
@@ -73,8 +74,20 @@ export default function App() {
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
             }}
+            onClick={() => {
+              setSelected(marker);
+            }}
           />
         ))}
+
+        {selected ? (
+          <InfoWindow>
+            <div>
+              <h4>New Skate Spots Found!</h4>
+              <p>Hooray {formatRelative(selected.time, new Date())}</p>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );
