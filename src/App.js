@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 // import { skateboard_icon } from "../public/skateboard_icon.";
@@ -39,10 +39,10 @@ export default function App() {
     ]);
   }, []);
 
-  const mapRef = useRef();
-  // const onMapLoad = useCallback((map) => {
-  //   mapRef.cureent = map;
-  // }, []);
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
 
   if (loadError) return "Error laoding maps";
   if (!isLoaded) return "Loading map...";
@@ -61,7 +61,7 @@ export default function App() {
         zoom={10}
         options={options}
         onClick={onMapClick}
-        // onLoad={onMapLoad}
+        onLoad={onMapLoad}
       >
         {markers.map((marker) => (
           <Marker
