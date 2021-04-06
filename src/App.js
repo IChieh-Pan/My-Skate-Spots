@@ -1,7 +1,13 @@
 import React from "react";
 import { useState, useCallback } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
+import { formatRelative } from "date-fns";
 // import { skateboard_icon } from "../public/skateboard_icon.";
 
 const libraries = ["places"];
@@ -81,10 +87,10 @@ export default function App() {
         ))}
 
         {selected ? (
-          <InfoWindow>
+          <InfoWindow position={{ lat: selected.lat, lng: selected.lng }}>
             <div>
-              <h4>New Skate Spots Found!</h4>
-              <p>Hooray {formatRelative(selected.time, new Date())}</p>
+              <h4>🌟New Skate Spot!🌟</h4>
+              <p>Found {formatRelative(selected.time, new Date())}</p>
             </div>
           </InfoWindow>
         ) : null}
