@@ -87,7 +87,10 @@ export default function App() {
         ))}
 
         {selected ? (
-          <InfoWindow position={{ lat: selected.lat, lng: selected.lng }}>
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={setSelected(null)}
+          >
             <div>
               <h4>🌟New Skate Spot!🌟</h4>
               <p>Found {formatRelative(selected.time, new Date())}</p>
