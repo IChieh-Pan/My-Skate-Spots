@@ -1,6 +1,15 @@
-# Getting Started with Create React App
+## Ping your favorite skate spots!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## React Hooks used in this project
+
+useCallback
+
+
+## Google Maps Api
+
+https://developers.google.com/maps/documentation/javascript/infowindows
+
 
 ## Available Scripts
 
